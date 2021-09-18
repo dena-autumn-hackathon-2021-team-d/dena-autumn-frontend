@@ -10,10 +10,10 @@
             <v-list-item :key="index">
               <v-list-item-avatar class="person"></v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title v-html="comment.user"></v-list-item-title>
-                <v-list-item-subtitle
-                  v-html="comment.sentence"
-                ></v-list-item-subtitle>
+                <v-list-item-title>{{ comment.user }}</v-list-item-title>
+                <v-list-item-subtitle>{{
+                  comment.sentence
+                }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
 

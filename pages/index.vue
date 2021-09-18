@@ -4,6 +4,9 @@
       <Anser class="mb-2" />
       <Anser class="mb-2" />
       <Anser class="mb-2" />
+      <Anser class="mb-2" />
+      <Anser class="mb-2" />
+      <Anser class="mb-2" />
     </v-col>
   </v-row>
 </template>

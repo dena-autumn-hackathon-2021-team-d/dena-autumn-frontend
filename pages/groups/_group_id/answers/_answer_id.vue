@@ -2,7 +2,7 @@
   <section class="detail-page">
     <div class="detail-container">
       <div class="detail-container__answer">
-        <Anser />
+        <Anser :link-display="false" />
       </div>
       <div class="detail-container__comments">
         <v-list three-line>

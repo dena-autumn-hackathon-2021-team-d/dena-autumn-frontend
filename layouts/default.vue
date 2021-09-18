@@ -37,15 +37,39 @@
       </v-container>
     </v-main>
     <v-footer fixed app>
-      <div class="d-flex">
+      <v-row justify="center" no-gutters>
         <h3>最近あった面白いことは？</h3>
         <v-btn
           elevation="2"
+          color="primary"
+          class="ml-2"
           @click="dialogStatus.question = !dialogStatus.question"
           >回答する</v-btn
         >
-      </div>
+        <v-btn class="ml-2" elevation="2" @click="nextQuestion"
+          >別の質問へ</v-btn
+        >
+      </v-row>
     </v-footer>
+    <!-- userNameDialog -->
+    <v-dialog v-model="dialogStatus.userName" width="500">
+      <v-card>
+        <v-card-title class="text-h5 lighten-2">
+          名前を入力してください
+        </v-card-title>
+
+        <v-card-text>
+          <v-text-field v-model="name" label="名前"></v-text-field>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="resistName"> 登録 </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <!-- questionDialog -->
     <v-dialog v-model="dialogStatus.question" width="500">
       <v-card>
@@ -86,14 +110,28 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js',
+      name: '',
       dialogStatus: {
         question: false,
+        userName: false,
       },
+    }
+  },
+  mounted() {
+    if (!localStorage.getItem(this.$route.params.groupId)) {
+      this.dialogStatus.userName = true
     }
   },
   methods: {
     send() {
       this.dialogStatus.question = !this.dialogStatus.question
+    },
+    resistName() {
+      localStorage.setItem(this.$route.params.groupId, this.name)
+      this.dialogStatus.userName = !this.dialogStatus.userName
+    },
+    nextQuestion() {
+      console.log('nextQuestion')
     },
   },
 }

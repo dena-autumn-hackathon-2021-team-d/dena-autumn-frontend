@@ -102,7 +102,12 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: '回答一覧',
+          to: '/groups/' + this.$route.params.groupId + '/answers',
+        },
+        {
+          icon: 'mdi-message-question-outline',
+          title: '質問登録',
           to: '/',
         },
       ],

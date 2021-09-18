@@ -13,9 +13,20 @@
       <h2 class="mb-2">たこ焼き！</h2>
       <p>質問: 好きな食べ物は?</p>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="linkDisplay">
       <v-spacer />
       <v-btn color="primary" nuxt to="/inspire"> コメントを見る </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  props: {
+    linkDisplay: {
+      type: Boolean,
+      default: true,
+    },
+  },
+})
+</script>

@@ -26,7 +26,9 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <nuxt-link :to="`/groups/${this.$route.params['groupId']}/answers`">
+        <v-toolbar-title class="title" v-text="title" />
+      </nuxt-link>
       <v-spacer />
     </v-app-bar>
     <v-main>
@@ -91,9 +93,14 @@ export default {
   },
   methods: {
     send() {
-      console.log('send')
       this.dialogStatus.question = !this.dialogStatus.question
     },
   },
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+</style>

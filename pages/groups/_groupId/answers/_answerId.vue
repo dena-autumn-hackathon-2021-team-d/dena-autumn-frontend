@@ -17,7 +17,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-divider :key="index"></v-divider>
+            <v-divider :key="comment.id"></v-divider>
           </template>
         </v-list>
       </div>

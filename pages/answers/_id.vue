@@ -5,13 +5,21 @@
         <Anser />
       </div>
       <div class="detail-container__comments">
-        <div
-          v-for="comment in comments"
-          :key="comment.id"
-          class="detail-container__comments__comment"
-        >
-          <Comment :user="comment.user" :sentence="comment.sentence" />
-        </div>
+        <v-list three-line>
+          <template v-for="(comment, index) in comments">
+            <v-list-item :key="index">
+              <v-list-item-avatar class="person"></v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title v-html="comment.user"></v-list-item-title>
+                <v-list-item-subtitle
+                  v-html="comment.sentence"
+                ></v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider :key="index"></v-divider>
+          </template>
+        </v-list>
       </div>
     </div>
     <div class="new-question-container">
@@ -62,14 +70,10 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.person {
+  background-color: #f5f5f5;
+}
 .detail-page {
-  .detail-container {
-    &__comments {
-      &__comment {
-        margin: 12px 0;
-      }
-    }
-  }
   .new-question-container {
     width: 100%;
     .sendButton {

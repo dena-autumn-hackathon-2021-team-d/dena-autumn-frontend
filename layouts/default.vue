@@ -26,7 +26,7 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <nuxt-link :to="`/groups/${this.$route.params['groupId']}/answers`">
+      <nuxt-link :to="`/groups/${$route.params['groupId']}/answers`">
         <v-toolbar-title class="title" v-text="title" />
       </nuxt-link>
       <v-spacer />
@@ -107,8 +107,8 @@ export default {
         },
         {
           icon: 'mdi-message-question-outline',
-          title: '質問登録',
-          to: '/',
+          title: '質問を送る',
+          to: '/groups/' + this.$route.params.groupId + '/questions/new',
         },
       ],
       miniVariant: false,

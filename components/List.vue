@@ -36,9 +36,5 @@ export default Vue.extend({
       required: true,
     },
   },
-
-  created() {
-    console.log(this.$router.push)
-  },
 })
 </script>

@@ -35,14 +35,19 @@
       </v-container>
     </v-main>
     <v-footer fixed app>
-      <div class="d-flex">
+      <v-row justify="center" no-gutters>
         <h3>最近あった面白いことは？</h3>
         <v-btn
           elevation="2"
+          color="primary"
+          class="ml-2"
           @click="dialogStatus.question = !dialogStatus.question"
           >回答する</v-btn
         >
-      </div>
+        <v-btn class="ml-2" elevation="2" @click="nextQuestion"
+          >別の質問へ</v-btn
+        >
+      </v-row>
     </v-footer>
     <!-- userNameDialog -->
     <v-dialog v-model="dialogStatus.userName" width="500">
@@ -123,6 +128,9 @@ export default {
     resistName() {
       localStorage.setItem(this.$route.params.groupId, this.name)
       this.dialogStatus.userName = !this.dialogStatus.userName
+    },
+    nextQuestion() {
+      console.log('nextQuestion')
     },
   },
 }

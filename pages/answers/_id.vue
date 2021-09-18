@@ -21,8 +21,27 @@
         placeholder="いいね！"
         outlined
       ></v-text-field>
-      <v-btn @click="consol()" class="sendButton">コメントを送る</v-btn>
+      <v-btn class="sendButton" @click="consol()">コメントを送る</v-btn>
     </div>
+    <!-- questionDialog -->
+    <v-dialog v-model="dialogStatus.question" width="500">
+      <v-card>
+        <v-card-title class="text-h5 lighten-2">
+          最近あった面白いことは？
+        </v-card-title>
+
+        <v-card-text>
+          <v-textarea name="Anser" label="回答"></v-textarea>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="send"> 回答 </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </section>
 </template>
 
@@ -46,6 +65,9 @@ export default Vue.extend({
         },
       ],
       answers: [],
+      dialogStatus: {
+        question: false,
+      },
     }
   },
 
@@ -56,6 +78,9 @@ export default Vue.extend({
         user: 'manattan',
         sentence: this.new_comment,
       })
+    },
+    send() {
+      console.log('send')
     },
   },
 })

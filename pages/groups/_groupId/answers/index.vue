@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col v-for="(qa, index) in qas" :key="index" cols="12" sm="8" md="6">
-      <List :qa="qa" />
+      <List :qa="qa" :isExistButton="true" />
     </v-col>
   </v-row>
 </template>

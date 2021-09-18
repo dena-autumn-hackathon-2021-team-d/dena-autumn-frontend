@@ -13,7 +13,7 @@
       <h2 class="mb-2">{{ qa.answer.content }}</h2>
       <p>{{ qa.question.content }}</p>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="isExistButton">
       <v-spacer />
       <v-btn
         color="primary"
@@ -34,6 +34,11 @@ export default Vue.extend({
     qa: {
       type: Object as Vue.PropType<Qa>,
       required: true,
+    },
+    isExistButton: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
 })

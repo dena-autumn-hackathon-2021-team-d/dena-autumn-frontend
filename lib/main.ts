@@ -47,6 +47,7 @@ export const getTimeline = async (group_id: string) => {
           questionId: question.id,
           user: question.username,
           content: question.contents,
+          num_answers: question.num_answers,
         },
       })
     }
@@ -74,8 +75,6 @@ export const postAnswer = async (
     method: 'POST',
     body: JSON.stringify(data),
   })
-
-  console.log(res)
 
   return res.json()
 }
@@ -166,6 +165,7 @@ export const getQuestionAndComments = async (
         questionId: question.id,
         user: question.username,
         content: question.contents,
+        num_answers: question.num_answers,
       },
     },
     comments,

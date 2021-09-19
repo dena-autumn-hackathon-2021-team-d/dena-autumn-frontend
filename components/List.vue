@@ -11,7 +11,10 @@
     </v-card-title>
     <v-card-text>
       <h2 class="mb-2">{{ qa.answer.content }}</h2>
-      <p>{{ qa.question.content }}</p>
+      <h5>{{ qa.question.content }}</h5>
+      <h5 v-if="qa.question.num_answers > 1">
+        {{ qa.question.user }}さんからの質問です
+      </h5>
     </v-card-text>
     <v-card-actions v-if="isExistButton">
       <v-spacer />

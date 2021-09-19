@@ -41,7 +41,9 @@
         <v-card elevation="2" class="mb-4 question">
           <v-card-title>{{ question.contents }}</v-card-title>
           <v-card-text>
-            <p>{{ question.username }}からの質問です</p>
+            <p v-if="question.num_answers > 1">
+              {{ question.username }}からの質問です
+            </p>
             <v-textarea
               v-model="answer"
               auto-grow

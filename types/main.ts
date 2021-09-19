@@ -9,6 +9,7 @@ export interface Question {
   questionId: string
   user: string
   content: string
+  num_answers: number
 }
 
 export interface Qa {

@@ -9,6 +9,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import { createGroup } from '~/lib/main'
 export default Vue.extend({
   layout: 'landing',
   data() {
@@ -17,9 +18,15 @@ export default Vue.extend({
     }
   },
   methods: {
-    create() {
-      console.log('create')
-      this.$router.push('/groups/groupId/answers')
+    async create() {
+      if (this.groupName) {
+        const res = await createGroup(this.groupName)
+        const groupId = res.id
+        console.log('created, group id: ', groupId)
+        this.$router.push(`/groups/${groupId}/answers`)
+      } else {
+        alert('名前を入力してください')
+      }
     },
   },
 })

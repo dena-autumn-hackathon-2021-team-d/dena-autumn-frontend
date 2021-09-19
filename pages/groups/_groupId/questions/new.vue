@@ -14,16 +14,26 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { postQuestion } from '~/lib/main'
 export default Vue.extend({
   data() {
     return {
-      question: '' as String,
+      question: '' as string,
     }
   },
 
   methods: {
-    post() {
-      if (this.question) console.log(this.question)
+    async post() {
+      const user = localStorage.getItem(this.$route.params.groupId)
+      const groupId = this.$route.params.groupId
+      if (user) {
+        await postQuestion(this.question, groupId, user)
+      } else {
+        console.error('not user')
+      }
+
+      alert('質問を送信しました！')
+      this.$router.push(`/groups/${this.$route.params.groupId}/answers`)
     },
   },
 })

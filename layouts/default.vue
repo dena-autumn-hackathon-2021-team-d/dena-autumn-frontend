@@ -36,10 +36,10 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer v-if="this.question" fixed app color="rgba(0, 0, 0, 0)">
+    <v-footer v-if="question" fixed app color="rgba(0, 0, 0, 0)">
       <v-row justify="end" no-gutters>
         <v-card elevation="2" class="mb-4 question">
-          <v-card-title>{{ this.question.contents }}</v-card-title>
+          <v-card-title>{{ question.contents }}</v-card-title>
           <v-card-text>
             <v-textarea
               auto-grow
@@ -106,8 +106,33 @@
 </template>
 
 <script>
-import { getQuestions, getRandomQuestion, postAnswer } from '~/lib/main'
+import {
+  getQuestions,
+  getRandomQuestion,
+  postAnswer,
+  getGroupName,
+} from '~/lib/main'
+
 export default {
+  async middleware({ store, redirect, route }) {
+    // Vuexからグループ名の取得
+    const groupName = store.getters.getGroupName(route.params.groupId)
+    if (groupName) {
+      // Vuexにある場合
+      this.title = groupName
+    } else {
+      // Vuexにない場合
+      try {
+        const res = await getGroupName(route.params.groupId)
+        // Vuexにセット(画面遷移時に使用)
+        store.commit('setGroupName', route.params.groupId, res.groupName)
+        // グループ名を指定
+        this.title = res.groupName
+      } catch {
+        redirect('/')
+      }
+    }
+  },
   data() {
     return {
       clipped: false,
@@ -128,7 +153,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: '',
       name: '',
       dialogStatus: {
         userName: false,
@@ -139,6 +164,7 @@ export default {
     }
   },
   mounted() {
+    // ユーザーネームがセットされているか
     if (!localStorage.getItem(this.$route.params.groupId)) {
       this.dialogStatus.userName = true
     }

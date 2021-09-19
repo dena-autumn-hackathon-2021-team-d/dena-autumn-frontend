@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Qa } from '~/types/main'
 
 const baseURL = 'http://localhost:8000/api'
@@ -5,7 +6,7 @@ const baseURL = 'http://localhost:8000/api'
 // グループを作成
 export const createGroup = async (name: string) => {
   const data = {
-    name: name,
+    name,
   }
   const res = await fetch(`${baseURL}/group`, {
     method: 'POST',
@@ -161,4 +162,10 @@ export const getQuestionAndComments = async (
     },
     comments,
   }
+}
+
+// グループ名を取得する
+export const getGroupName = async (group_id: string) => {
+  const res = await fetch(`${baseURL}/group/${group_id}`)
+  return res.json()
 }

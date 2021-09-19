@@ -30,7 +30,7 @@ export const getTimeline = async (group_id: string) => {
 
   const answers = await res.json()
   const qa: Qa[] = []
-  if (answers.length > 1) {
+  if (answers.length > 0) {
     for (const answer of answers) {
       const res2 = await fetch(
         `${baseURL}/group/${group_id}/question/${answer.question_id}`

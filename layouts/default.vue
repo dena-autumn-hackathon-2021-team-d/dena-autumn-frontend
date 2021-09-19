@@ -40,11 +40,11 @@
       <v-row justify="end" no-gutters>
         <v-card elevation="2" class="mb-4 question">
           <v-card-title>{{ question.contents }}</v-card-title>
-          <p>{{ question.username }}からの質問です</p>
           <v-card-text>
+            <p>{{ question.username }}からの質問です</p>
             <v-textarea
-              auto-grow
               v-model="answer"
+              auto-grow
               rows="2"
               name="input-7-4"
               label="回答"

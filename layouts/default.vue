@@ -27,7 +27,7 @@
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <nuxt-link :to="`/groups/${$route.params['groupId']}/answers`">
-        <v-toolbar-title class="title" v-text="title" />
+        <v-toolbar-title class="title" v-text="title + 'の質問箱'" />
       </nuxt-link>
       <v-spacer />
     </v-app-bar>
@@ -61,17 +61,20 @@
         </v-card>
       </v-row>
     </v-footer>
+    <!-- footer -->
     <v-footer v-else fixed app color="rgba(0, 0, 0, 0)">
       <v-row justify="end" no-gutters>
         <v-card elevation="2" class="mb-4 question">
-          <v-card-title>最近あった面白いことは？</v-card-title>
+          <v-card-title>Q.最近あった面白いことは？</v-card-title>
           <v-card-text>
+            <p>しゅうからの質問です</p>
             <v-textarea
               v-model="answer"
               auto-grow
               rows="2"
               name="input-7-4"
               label="回答"
+              hide-details
             ></v-textarea>
           </v-card-text>
           <v-card-actions>

@@ -16,7 +16,7 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
-      title: 'Vuetify.js',
+      title: 'グループで使える質問箱',
     }
   },
 })

@@ -148,11 +148,10 @@ export default {
   },
 
   async created() {
-    // const res = await getRandomQuestion(this.$route.params.groupId)
-    // this.question = res
-    const res = await getQuestions(this.$route.params.groupId)
-    this.questions = res
-    this.question = res[0]
+    const res = await getRandomQuestion(this.$route.params.groupId)
+    this.question = res
+    const res2 = await getQuestions(this.$route.params.groupId)
+    this.questions = res2
   },
   methods: {
     async send() {

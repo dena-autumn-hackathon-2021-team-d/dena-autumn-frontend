@@ -61,11 +61,13 @@
         </v-card>
       </v-row>
     </v-footer>
+    <!-- footer -->
     <v-footer v-else fixed app color="rgba(0, 0, 0, 0)">
       <v-row justify="end" no-gutters>
         <v-card elevation="2" class="mb-4 question">
           <v-card-title>最近あった面白いことは？</v-card-title>
           <v-card-text>
+            <p>しゅうからの質問です</p>
             <v-textarea
               v-model="answer"
               auto-grow

@@ -152,7 +152,7 @@ export default {
     this.question = res[0]
   },
   methods: {
-    send() {
+    async send() {
       const user = localStorage.getItem(this.$route.params.groupId)
       if (this.answer) {
         const res = await postAnswer(

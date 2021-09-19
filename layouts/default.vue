@@ -36,19 +36,29 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer fixed app>
-      <v-row justify="center" no-gutters>
-        <h3>最近あった面白いことは？</h3>
-        <v-btn
-          elevation="2"
-          color="primary"
-          class="ml-2"
-          @click="dialogStatus.question = !dialogStatus.question"
-          >回答する</v-btn
-        >
-        <v-btn class="ml-2" elevation="2" @click="nextQuestion"
-          >別の質問へ</v-btn
-        >
+    <v-footer fixed app color="rgba(0, 0, 0, 0)">
+      <v-row justify="end" no-gutters>
+        <v-card elevation="2" class="mb-4 question">
+          <v-card-title>最近あった面白いことは？</v-card-title>
+          <v-card-text>
+            <v-textarea
+              auto-grow
+              rows="2"
+              name="input-7-4"
+              label="回答"
+            ></v-textarea>
+          </v-card-text>
+          <v-card-actions>
+            <v-row justify="end" no-gutters>
+              <v-btn class="ml-2" elevation="2" @click="nextQuestion"
+                >別の質問へ</v-btn
+              >
+              <v-btn elevation="2" color="primary" class="ml-2" @click="send"
+                >回答する</v-btn
+              >
+            </v-row>
+          </v-card-actions>
+        </v-card>
       </v-row>
     </v-footer>
     <!-- userNameDialog -->
@@ -67,25 +77,6 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click="resistName"> 登録 </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- questionDialog -->
-    <v-dialog v-model="dialogStatus.question" width="500">
-      <v-card>
-        <v-card-title class="text-h5 lighten-2">
-          最近あった面白いことは？
-        </v-card-title>
-
-        <v-card-text>
-          <v-textarea name="Anser" label="回答"></v-textarea>
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="send"> 回答 </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -118,7 +109,6 @@ export default {
       title: 'Vuetify.js',
       name: '',
       dialogStatus: {
-        question: false,
         userName: false,
       },
       question: null,
@@ -136,7 +126,7 @@ export default {
   },
   methods: {
     send() {
-      this.dialogStatus.question = !this.dialogStatus.question
+      console.log('send')
     },
     resistName() {
       localStorage.setItem(this.$route.params.groupId, this.name)
@@ -152,5 +142,14 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
+}
+.question {
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* 600pxからの幅の場合に適応される */
+  .question {
+    width: 600px;
+  }
 }
 </style>

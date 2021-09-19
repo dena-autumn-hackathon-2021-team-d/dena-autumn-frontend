@@ -174,7 +174,7 @@ export default {
       localStorage.setItem(this.$route.params.groupId, this.name)
       this.dialogStatus.userName = !this.dialogStatus.userName
     },
-    nextQuestion() {
+    async nextQuestion() {
       const res = await getRandomQuestion(this.$route.params.groupId)
       this.question = res
       console.log('nextQuestion')

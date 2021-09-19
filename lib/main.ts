@@ -99,6 +99,11 @@ export const getRandomQuestion = async (group_id: string) => {
   return res.json()
 }
 
+export const getQuestions = async (group_id: string) => {
+  const res = await fetch(`${baseURL}/group/${group_id}/questions`)
+  return res.json()
+}
+
 // あるIDの質問を取得する
 export const getAQuestion = async (group_id: string, question_id: string) => {
   const res = await fetch(
@@ -120,13 +125,40 @@ export const getComments = async (
 }
 
 // 詳細ページ / 質問を取得する
-export const getQuestion = async (group_id: string, question_id: string) => {
+export const getQuestionAndComments = async (
+  group_id: string,
+  question_id: string,
+  answer_id: string
+) => {
   const res = await fetch(
-    `${baseURL}/groups/${group_id}/questions/${question_id}`,
-    {
-      method: 'GET',
-    }
+    `${baseURL}/groups/${group_id}/questions/${question_id}`
   )
+  const question = await res.json()
 
-  return res.json()
+  const res2 = await fetch(
+    `${baseURL}/groups/${group_id}/questions/${question_id}/answers/${answer_id}`
+  )
+  const answer = await res2.json()
+
+  const res3 = await fetch(
+    `${baseURL}/groups/${group_id}/questions/${question_id}/answers/${answer_id}/comments`
+  )
+  const comments = await res3.json()
+
+  return {
+    qa: {
+      answer: {
+        answerId: answer.id,
+        content: answer.contents,
+        user: answer.username,
+        questionId: question.id,
+      },
+      question: {
+        questionId: question.id,
+        user: question.username,
+        content: question.contents,
+      },
+    },
+    comments,
+  }
 }

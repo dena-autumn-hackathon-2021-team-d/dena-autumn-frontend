@@ -36,10 +36,10 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-footer fixed app color="rgba(0, 0, 0, 0)">
+    <v-footer v-if="this.question" fixed app color="rgba(0, 0, 0, 0)">
       <v-row justify="end" no-gutters>
         <v-card elevation="2" class="mb-4 question">
-          <v-card-title>最近あった面白いことは？</v-card-title>
+          <v-card-title>{{ this.question.contents }}</v-card-title>
           <v-card-text>
             <v-textarea
               auto-grow
@@ -56,6 +56,28 @@
               <v-btn elevation="2" color="primary" class="ml-2" @click="send"
                 >回答する</v-btn
               >
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-row>
+    </v-footer>
+    <v-footer v-else fixed app color="rgba(0, 0, 0, 0)">
+      <v-row justify="end" no-gutters>
+        <v-card elevation="2" class="mb-4 question">
+          <v-card-title>最近あった面白いことは？</v-card-title>
+          <v-card-text>
+            <v-textarea
+              v-model="answer"
+              auto-grow
+              rows="2"
+              name="input-7-4"
+              label="回答"
+            ></v-textarea>
+          </v-card-text>
+          <v-card-actions>
+            <v-row justify="end" no-gutters>
+              <v-btn class="ml-2" elevation="2">別の質問へ</v-btn>
+              <v-btn elevation="2" color="primary" class="ml-2">回答する</v-btn>
             </v-row>
           </v-card-actions>
         </v-card>
@@ -84,7 +106,7 @@
 </template>
 
 <script>
-import { getRandomQuestion } from '~/lib/main'
+import { getQuestions, getRandomQuestion, postAnswer } from '~/lib/main'
 export default {
   data() {
     return {
@@ -112,6 +134,8 @@ export default {
         userName: false,
       },
       question: null,
+      questions: [],
+      answer: '',
     }
   },
   mounted() {
@@ -121,18 +145,34 @@ export default {
   },
 
   async created() {
-    const res = await getRandomQuestion(this.$route.params.groupId)
-    this.question = res
+    // const res = await getRandomQuestion(this.$route.params.groupId)
+    // this.question = res
+    const res = await getQuestions(this.$route.params.groupId)
+    this.questions = res
+    this.question = res[0]
   },
   methods: {
     send() {
-      console.log('send')
+      const user = localStorage.getItem(this.$route.params.groupId)
+      if (this.answer) {
+        const res = await postAnswer(
+          this.answer,
+          user,
+          this.$route.params.groupId,
+          this.question.id
+        )
+
+        if (res) {
+          alert('正常にpostされました！！')
+        }
+      }
     },
     resistName() {
       localStorage.setItem(this.$route.params.groupId, this.name)
       this.dialogStatus.userName = !this.dialogStatus.userName
     },
     nextQuestion() {
+      this.question = res[res.length - 1]
       console.log('nextQuestion')
     },
   },

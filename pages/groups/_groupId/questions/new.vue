@@ -5,7 +5,7 @@
     <div class="mt-4">
       <v-text-field
         v-model="question"
-        label="最近好きな人できた？"
+        label="例: 最近好きな人できた？"
         single-line
         outlined
         required

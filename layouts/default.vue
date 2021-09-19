@@ -74,6 +74,7 @@
               rows="2"
               name="input-7-4"
               label="回答"
+              hide-details
             ></v-textarea>
           </v-card-text>
           <v-card-actions>

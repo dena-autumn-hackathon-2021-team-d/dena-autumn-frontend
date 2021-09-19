@@ -2,14 +2,18 @@
   <div class="post-question-page">
     <h1 class="mt-4 mb-4 headline">新しい質問を送る</h1>
     質問をしよう！
-    <v-text-field
-      v-model="question"
-      label="最近好きな人できた？"
-      single-line
-      outlined
-      required
-    ></v-text-field>
-    <v-btn color="primary" @click="post">質問を誰かに送る！</v-btn>
+    <div class="mt-4">
+      <v-text-field
+        v-model="question"
+        label="最近好きな人できた？"
+        single-line
+        outlined
+        required
+        hide-details
+        class="mb-2"
+      ></v-text-field>
+      <v-btn color="primary" @click="post">質問を誰かに送る！</v-btn>
+    </div>
   </div>
 </template>
 

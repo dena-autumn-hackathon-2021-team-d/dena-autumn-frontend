@@ -116,19 +116,16 @@ import {
 export default {
   async middleware({ store, redirect, route }) {
     // Vuexからグループ名の取得
-    const groupName = store.getters.getGroupName(route.params.groupId)
-    if (groupName) {
-      // Vuexにある場合
-      this.title = groupName
-    } else {
-      // Vuexにない場合
+    if (!store.getters.getGroupName(route.params.groupId)) {
       try {
+        // グループ名取得
         const res = await getGroupName(route.params.groupId)
-        // Vuexにセット(画面遷移時に使用)
-        store.commit('setGroupName', route.params.groupId, res.groupName)
-        // グループ名を指定
-        this.title = res.groupName
+        store.commit('setGroupName', {
+          groupId: route.params.groupId,
+          groupName: res.name,
+        })
       } catch {
+        // 存在しないグループID
         redirect('/')
       }
     }
@@ -153,7 +150,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: '',
+      title: this.$store.getters.getGroupName(this.$route.params.groupId),
       name: '',
       dialogStatus: {
         userName: false,

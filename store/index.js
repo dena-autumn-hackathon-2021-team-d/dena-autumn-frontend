@@ -1,17 +1,17 @@
 export const state = () => ({
-  groups: [],
+  groups: {},
 })
 
 export const mutations = {
-  setGroupName(state, groupId, groupName) {
-    state.groups[groupId] = {
-      groupName,
+  setGroupName(state, params) {
+    state.groups[params.groupId] = {
+      groupName: params.groupName,
     }
   },
 }
 
 export const getters = {
   getGroupName: (state) => (groupId) => {
-    return state.groups[groupId]?.name
+    return state.groups[groupId]?.groupName || ''
   },
 }

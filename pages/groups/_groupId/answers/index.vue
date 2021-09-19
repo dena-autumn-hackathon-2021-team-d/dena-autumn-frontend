@@ -2,10 +2,10 @@
   <section>
     <v-row justify="center" align="center">
       <v-col v-for="(qa, index) in qas" :key="index" cols="12" sm="8" md="6">
-        <List :qa="qa" :isExistButton="true" />
+        <List :qa="qa" :is-exist-button="true" />
       </v-col>
     </v-row>
-    <nuxt-link :to="`/groups/${this.$route.params['groupId']}/questions/new`">
+    <nuxt-link :to="`/groups/${$route.params['groupId']}/questions/new`">
       <v-btn class="toCreateQuestion">質問を誰かに送る！</v-btn>
     </nuxt-link>
   </section>

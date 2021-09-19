@@ -40,6 +40,7 @@
       <v-row justify="end" no-gutters>
         <v-card elevation="2" class="mb-4 question">
           <v-card-title>{{ question.contents }}</v-card-title>
+          <p>{{ question.username }}からの質問です</p>
           <v-card-text>
             <v-textarea
               auto-grow
@@ -57,31 +58,6 @@
               <v-btn elevation="2" color="primary" class="ml-2" @click="send()"
                 >回答する</v-btn
               >
-            </v-row>
-          </v-card-actions>
-        </v-card>
-      </v-row>
-    </v-footer>
-    <!-- footer -->
-    <v-footer v-else fixed app color="rgba(0, 0, 0, 0)">
-      <v-row justify="end" no-gutters>
-        <v-card elevation="2" class="mb-4 question">
-          <v-card-title>Q.最近あった面白いことは？</v-card-title>
-          <v-card-text>
-            <p>しゅうからの質問です</p>
-            <v-textarea
-              v-model="answer"
-              auto-grow
-              rows="2"
-              name="input-7-4"
-              label="回答"
-              hide-details
-            ></v-textarea>
-          </v-card-text>
-          <v-card-actions>
-            <v-row justify="end" no-gutters>
-              <v-btn class="ml-2" elevation="2">別の質問へ</v-btn>
-              <v-btn elevation="2" color="primary" class="ml-2">回答する</v-btn>
             </v-row>
           </v-card-actions>
         </v-card>

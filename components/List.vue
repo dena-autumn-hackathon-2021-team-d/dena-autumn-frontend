@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card v-if="qa">
     <v-card-title class="headline">
       <v-avatar size="28">
         <img

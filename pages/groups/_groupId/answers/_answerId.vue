@@ -1,8 +1,24 @@
 <template>
   <section class="detail-page">
     <div class="detail-container">
-      <div class="detail-container__answer">
-        <List :qa="qa" />
+      <div v-if="true" class="detail-container__answer">
+        <v-card>
+          <v-card-title class="headline">
+            <v-avatar size="28">
+              <img
+                alt="user"
+                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
+              />
+            </v-avatar>
+            <h5 class="ml-2">{{ answer.user }}</h5>
+          </v-card-title>
+          <v-card-text>
+            <h2 class="mb-2">
+              {{ answer.content }}
+            </h2>
+            <p>{{ question.content }}</p>
+          </v-card-text>
+        </v-card>
       </div>
       <div class="detail-container__comments">
         <v-list three-line>
@@ -16,7 +32,6 @@
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-
             <v-divider :key="comment.id"></v-divider>
           </template>
         </v-list>
@@ -37,25 +52,16 @@
 <script lang="ts">
 import Vue from 'vue'
 import { getQuestionAndComments, postComment } from '~/lib/main'
-import { Qa } from '~/types/main'
+// import { Qa } from '~/types/main'
 
 export default Vue.extend({
   data() {
     return {
       new_comment: '',
-      comments: [
-        {
-          id: '1',
-          user: 'manattan',
-          sentence: 'わかる！',
-        },
-        {
-          id: '2',
-          user: 'takapiro99',
-          sentence: 'わからんな',
-        },
-      ],
-      qa: {} as Qa,
+      comments: [],
+      qa: {},
+      answer: {},
+      question: {},
     }
   },
 
@@ -69,6 +75,8 @@ export default Vue.extend({
       this.$route.params.answerId
     )
     this.qa = question.qa
+    this.answer = question.qa.answer
+    this.question = question.qa.question
     this.comments = question.comments
   },
 
@@ -77,8 +85,8 @@ export default Vue.extend({
       const user = localStorage.getItem(this.$route.params.groupId)
       this.comments.push({
         id: this.comments.length + 1 + '',
-        user: '',
-        sentence: this.new_comment,
+        username: user,
+        contents: this.new_comment,
       })
       await postComment(
         this.new_comment,

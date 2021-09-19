@@ -15,13 +15,7 @@
     </v-card-text>
     <v-card-actions v-if="isExistButton">
       <v-spacer />
-      <v-btn
-        color="primary"
-        nuxt
-        :to="`/groups/1/answers/${qa.answer.answerId}?questionId=${qa.question.questionId}`"
-      >
-        コメントを見る
-      </v-btn>
+      <v-btn color="primary" nuxt @click="toDetail"> コメントを見る </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -39,6 +33,14 @@ export default Vue.extend({
       type: Boolean,
       required: false,
       default: false,
+    },
+  },
+
+  methods: {
+    toDetail() {
+      this.$router.push(
+        `/groups/${this.$route.params.groupId}/answers/${this.qa.answer.answerId}?questionId=${this.qa.question.questionId}`
+      )
     },
   },
 })

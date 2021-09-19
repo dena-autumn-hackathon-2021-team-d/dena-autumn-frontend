@@ -75,6 +75,8 @@ export const postAnswer = async (
     body: JSON.stringify(data),
   })
 
+  console.log(res)
+
   return res.json()
 }
 
@@ -134,21 +136,21 @@ export const getComments = async (
 // 詳細ページ / 質問を取得する
 export const getQuestionAndComments = async (
   group_id: string,
-  question_id: string,
+  question_id: string | (string | null)[],
   answer_id: string
 ) => {
   const res = await fetch(
-    `${baseURL}/groups/${group_id}/questions/${question_id}`
+    `${baseURL}/group/${group_id}/question/${question_id}`
   )
   const question = await res.json()
 
   const res2 = await fetch(
-    `${baseURL}/groups/${group_id}/questions/${question_id}/answers/${answer_id}`
+    `${baseURL}/group/${group_id}/question/${question_id}/answer/${answer_id}`
   )
   const answer = await res2.json()
 
   const res3 = await fetch(
-    `${baseURL}/groups/${group_id}/questions/${question_id}/answers/${answer_id}/comments`
+    `${baseURL}/group/${group_id}/question/${question_id}/answer/${answer_id}/comments`
   )
   const comments = await res3.json()
 
@@ -173,5 +175,28 @@ export const getQuestionAndComments = async (
 // グループ名を取得する
 export const getGroupName = async (group_id: string) => {
   const res = await fetch(`${baseURL}/group/${group_id}`)
+  return res.json()
+}
+
+export const postComment = async (
+  contents: string,
+  username: string | null,
+  group_id: string,
+  question_id: string | (string | null)[],
+  answer_id: string
+) => {
+  const data = {
+    contents,
+    username,
+    group_id,
+    question_id,
+    answer_id,
+  }
+
+  const res = await fetch(`${baseURL}/comment`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
   return res.json()
 }

@@ -43,6 +43,7 @@
           <v-card-text>
             <v-textarea
               auto-grow
+              v-model="answer"
               rows="2"
               name="input-7-4"
               label="回答"
@@ -53,7 +54,7 @@
               <v-btn class="ml-2" elevation="2" @click="nextQuestion"
                 >別の質問へ</v-btn
               >
-              <v-btn elevation="2" color="primary" class="ml-2" @click="send"
+              <v-btn elevation="2" color="primary" class="ml-2" @click="send()"
                 >回答する</v-btn
               >
             </v-row>
@@ -179,6 +180,7 @@ export default {
   },
   methods: {
     async send() {
+      console.log('呼び出し')
       const user = localStorage.getItem(this.$route.params.groupId)
       if (this.answer) {
         const res = await postAnswer(

@@ -19,7 +19,7 @@
       回答がないですね〜。回答していきましょう！
     </v-alert>
     <!-- 回答一覧 -->
-    <v-row justify="center" align="center">
+    <v-row v-else justify="center" align="center">
       <v-col v-for="(qa, index) in qas" :key="index" cols="12" sm="8" md="6">
         <List :qa="qa" :is-exist-button="true" />
       </v-col>

@@ -1,12 +1,12 @@
 export interface Answer {
-  answerId: number
+  answerId: string
   content: string
   user: string
-  questionId: number
+  questionId: string
 }
 
 export interface Question {
-  questionId: number
+  questionId: string
   user: string
   content: string
 }

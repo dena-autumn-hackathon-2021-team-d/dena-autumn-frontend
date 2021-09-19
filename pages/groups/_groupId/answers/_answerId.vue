@@ -10,9 +10,9 @@
             <v-list-item :key="index">
               <v-list-item-avatar class="person"></v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title>{{ comment.user }}</v-list-item-title>
+                <v-list-item-title>{{ comment.username }}</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  comment.sentence
+                  comment.contents
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -29,14 +29,14 @@
         placeholder="いいね！"
         outlined
       ></v-text-field>
-      <v-btn class="sendButton" @click="consol()">コメントを送る</v-btn>
+      <v-btn class="sendButton" @click="sendComment">コメントを送る</v-btn>
     </div>
   </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { getQuestionAndComments } from '~/lib/main'
+import { getQuestionAndComments, postComment } from '~/lib/main'
 import { Qa } from '~/types/main'
 
 export default Vue.extend({
@@ -45,47 +45,48 @@ export default Vue.extend({
       new_comment: '',
       comments: [
         {
-          id: 1,
+          id: '1',
           user: 'manattan',
           sentence: 'わかる！',
         },
         {
-          id: 2,
+          id: '2',
           user: 'takapiro99',
           sentence: 'わからんな',
         },
       ],
-      qa: {
-        answer: {
-          answerId: 4,
-          content: '干し芋！',
-          user: 'manattan',
-        },
-        question: {
-          questionId: 1,
-          user: 'たかぴろ',
-          content: '好きな食べ物は？',
-        },
-      } as Qa,
+      qa: {} as Qa,
     }
   },
 
   async created() {
+    if (!this.$route.query.questionId) {
+      console.error('questionIdが存在しません')
+    }
     const question = await getQuestionAndComments(
       this.$route.params.groupId,
-      this.$route.params.questionId,
+      this.$route.query.questionId,
       this.$route.params.answerId
     )
-    console.log(question)
+    this.qa = question.qa
+    this.comments = question.comments
   },
 
   methods: {
-    consol() {
+    async sendComment() {
+      const user = localStorage.getItem(this.$route.params.groupId)
       this.comments.push({
-        id: this.comments.length + 1,
-        user: 'manattan',
-        sentence: this.new_comment,
+        id: this.comments.length + 1 + '',
+        username: '',
+        contents: this.new_comment,
       })
+      await postComment(
+        this.new_comment,
+        user,
+        this.$route.params.groupId,
+        this.$route.query.questionId,
+        this.$route.params.answerId
+      )
     },
   },
 })

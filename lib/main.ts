@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:8000/api'
 } else {
   baseURL =
-    'http://dena-autumn-hackathon-1503303784.us-east-2.elb.amazonaws.com/'
+    'http://dena-autumn-hackathon-1503303784.us-east-2.elb.amazonaws.com/api'
 }
 
 // グループを作成

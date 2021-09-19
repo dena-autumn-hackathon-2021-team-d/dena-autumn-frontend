@@ -54,11 +54,17 @@ import Vue from 'vue'
 import { getQuestionAndComments, postComment } from '~/lib/main'
 // import { Qa } from '~/types/main'
 
+type comment = {
+  id: string
+  username: string | null
+  contents: string
+}
+
 export default Vue.extend({
   data() {
     return {
       new_comment: '',
-      comments: [],
+      comments: [] as comment[],
       qa: {},
       answer: {},
       question: {},

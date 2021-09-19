@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { getQuestion } from '~/lib/main'
 import { Qa } from '~/types/main'
 
 export default Vue.extend({
@@ -67,6 +68,14 @@ export default Vue.extend({
         },
       } as Qa,
     }
+  },
+
+  async created() {
+    const question = await getQuestion(
+      this.$route.params.groupId,
+      this.$route.params.questionId
+    )
+    console.log(question)
   },
 
   methods: {

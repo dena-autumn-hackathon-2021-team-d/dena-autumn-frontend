@@ -14,39 +14,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import List from '~/components/List.vue'
+import { getTimeline } from '~/lib/main'
 import { Qa } from '~/types/main'
 
 export default Vue.extend({
   components: { List },
   data() {
     return {
-      qas: [
-        {
-          answer: {
-            answerId: 4,
-            content: '干し芋！',
-            user: 'manattan',
-          },
-          question: {
-            questionId: 1,
-            user: 'たかぴろ',
-            content: '好きな食べ物は？',
-          },
-        },
-        {
-          answer: {
-            answerId: 4,
-            content: '干し芋！',
-            user: 'manattan',
-          },
-          question: {
-            questionId: 1,
-            user: 'たかぴろ',
-            content: '好きな食べ物は？',
-          },
-        },
-      ] as Qa[],
+      qas: [] as Qa[],
     }
+  },
+
+  async created() {
+    const res = await getTimeline(this.$route.params.groupId)
+    this.qas = res
   },
 })
 </script>

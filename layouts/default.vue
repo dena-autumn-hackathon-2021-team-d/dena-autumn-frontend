@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { getRandomQuestion } from '~/lib/main'
 export default {
   data() {
     return {
@@ -126,6 +127,11 @@ export default {
     if (!localStorage.getItem(this.$route.params.groupId)) {
       this.dialogStatus.userName = true
     }
+  },
+
+  async created() {
+    const res = await getRandomQuestion(this.$route.params.groupId)
+    console.log('ランダム: ', res)
   },
   methods: {
     send() {

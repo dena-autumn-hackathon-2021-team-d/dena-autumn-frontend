@@ -18,7 +18,7 @@
       <v-btn
         color="primary"
         nuxt
-        :to="`/groups/1/answers/${qa.answer.answerId}`"
+        :to="`/groups/1/answers/${qa.answer.answerId}?questionId=${qa.question.questionId}`"
       >
         コメントを見る
       </v-btn>

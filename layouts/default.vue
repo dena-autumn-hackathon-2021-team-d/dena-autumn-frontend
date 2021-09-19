@@ -175,7 +175,8 @@ export default {
       this.dialogStatus.userName = !this.dialogStatus.userName
     },
     nextQuestion() {
-      this.question = res[res.length - 1]
+      const res = await getRandomQuestion(this.$route.params.groupId)
+      this.question = res
       console.log('nextQuestion')
     },
   },

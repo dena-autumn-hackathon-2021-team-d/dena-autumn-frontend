@@ -121,6 +121,7 @@ export default {
         question: false,
         userName: false,
       },
+      question: null,
     }
   },
   mounted() {
@@ -131,7 +132,7 @@ export default {
 
   async created() {
     const res = await getRandomQuestion(this.$route.params.groupId)
-    console.log('ランダム: ', res)
+    this.question = res
   },
   methods: {
     send() {

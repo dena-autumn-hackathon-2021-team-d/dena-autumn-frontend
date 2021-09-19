@@ -93,6 +93,9 @@ export const postQuestion = async (
 // ランダムな質問を取得する
 export const getRandomQuestion = async (group_id: string) => {
   const res = await fetch(`${baseURL}/group/${group_id}/question`)
+  if (res.status === 404) {
+    return null
+  }
   return res.json()
 }
 

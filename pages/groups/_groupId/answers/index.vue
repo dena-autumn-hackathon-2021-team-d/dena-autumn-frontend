@@ -1,6 +1,15 @@
 <template>
   <section>
     <v-row justify="center" align="center">
+      <v-alert
+        v-if="qas.length === 0"
+        border="bottom"
+        colored-border
+        type="warning"
+        elevation="2"
+      >
+        回答がないですね〜。回答していきましょう！
+      </v-alert>
       <v-col v-for="(qa, index) in qas" :key="index" cols="12" sm="8" md="6">
         <List :qa="qa" :isExistButton="true" />
       </v-col>

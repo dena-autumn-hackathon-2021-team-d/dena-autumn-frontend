@@ -31,12 +31,11 @@ export default Vue.extend({
       }
       if (this.question && user) {
         await postQuestion(this.question, groupId, user)
+        alert('質問を送信しました！')
+        this.$router.push(`/groups/${this.$route.params.groupId}/answers`)
       } else {
         alert('空欄だよ！')
       }
-
-      alert('質問を送信しました！')
-      this.$router.push(`/groups/${this.$route.params.groupId}/answers`)
     },
   },
 })

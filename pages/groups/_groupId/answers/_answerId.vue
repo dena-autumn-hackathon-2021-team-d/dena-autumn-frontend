@@ -77,8 +77,8 @@ export default Vue.extend({
       const user = localStorage.getItem(this.$route.params.groupId)
       this.comments.push({
         id: this.comments.length + 1 + '',
-        username: '',
-        contents: this.new_comment,
+        user: '',
+        sentence: this.new_comment,
       })
       await postComment(
         this.new_comment,

@@ -5,6 +5,10 @@
     <v-btn color="primary" elevation="2" @click="create"
       >グループを作成する</v-btn
     >
+    <p class="mt-4">
+      オンラインのではコミニケーションが希薄になりがちです。<br />このサービスで互いの質問を通してコミュニケーションを活発させましょう。
+    </p>
+    <v-img class="mt-2" src="undraw_Partying_re_at7f.svg" />
   </div>
 </template>
 <script lang="ts">

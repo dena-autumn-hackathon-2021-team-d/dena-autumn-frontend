@@ -27,7 +27,7 @@
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <nuxt-link :to="`/groups/${$route.params['groupId']}/answers`">
-        <v-toolbar-title class="title" v-text="title" />
+        <v-toolbar-title class="title" v-text="title + 'の質問箱'" />
       </nuxt-link>
       <v-spacer />
     </v-app-bar>

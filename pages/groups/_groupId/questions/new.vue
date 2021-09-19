@@ -1,5 +1,6 @@
 <template>
   <div class="post-question-page">
+    <h1 class="mt-4 mb-4 headline">新しい質問を送る</h1>
     質問をしよう！
     <v-text-field
       v-model="question"
@@ -8,7 +9,7 @@
       outlined
       required
     ></v-text-field>
-    <v-btn @click="post">質問を誰かに送る！</v-btn>
+    <v-btn color="primary" @click="post">質問を誰かに送る！</v-btn>
   </div>
 </template>
 

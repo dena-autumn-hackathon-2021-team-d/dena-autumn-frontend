@@ -1,21 +1,24 @@
 <template>
   <section>
+    <!-- タイトル -->
+    <h1 class="mt-4 mb-4 headline">みんなの回答</h1>
+    <v-alert
+      v-if="qas.length === 0"
+      border="bottom"
+      colored-border
+      type="warning"
+      elevation="2"
+    >
+      回答がないですね〜。回答していきましょう！
+    </v-alert>
+    <!-- 回答一覧 -->
     <v-row justify="center" align="center">
-      <v-alert
-        v-if="qas.length === 0"
-        border="bottom"
-        colored-border
-        type="warning"
-        elevation="2"
-      >
-        回答がないですね〜。回答していきましょう！
-      </v-alert>
       <v-col v-for="(qa, index) in qas" :key="index" cols="12" sm="8" md="6">
         <List :qa="qa" :is-exist-button="true" />
       </v-col>
     </v-row>
     <nuxt-link :to="`/groups/${$route.params['groupId']}/questions/new`">
-      <v-btn class="toCreateQuestion">質問を誰かに送る！</v-btn>
+      <v-btn class="toCreateQuestion">新しい質問を送る</v-btn>
     </nuxt-link>
   </section>
 </template>

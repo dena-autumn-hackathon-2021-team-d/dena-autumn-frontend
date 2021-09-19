@@ -26,10 +26,13 @@ export default Vue.extend({
     async post() {
       const user = localStorage.getItem(this.$route.params.groupId)
       const groupId = this.$route.params.groupId
-      if (user) {
+      if (!user) {
+        return
+      }
+      if (this.question && user) {
         await postQuestion(this.question, groupId, user)
       } else {
-        console.error('not user')
+        alert('空欄だよ！')
       }
 
       alert('質問を送信しました！')

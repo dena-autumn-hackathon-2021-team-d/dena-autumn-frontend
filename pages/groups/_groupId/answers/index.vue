@@ -2,6 +2,13 @@
   <section>
     <!-- タイトル -->
     <h1 class="mt-4 mb-4 headline">みんなの回答</h1>
+    <!-- グループのリンク -->
+    <div class="d-flex mb-2">
+      <v-btn class="ml-auto" @click="linkCopy"
+        ><v-icon class="mr-1">mdi-attachment</v-icon
+        >このグループのリンクをコピーする</v-btn
+      >
+    </div>
     <v-alert
       v-if="qas.length === 0"
       border="bottom"
@@ -36,10 +43,30 @@ export default Vue.extend({
       qas: [] as Qa[],
     }
   },
-
   async created() {
     const res = await getTimeline(this.$route.params.groupId)
     this.qas = res
+  },
+  methods: {
+    // クリップボードにリンクをコピー
+    linkCopy() {
+      // テキストコピー用の一時要素を作成
+      const pre = document.createElement('pre')
+
+      // テキストを選択可能にしてテキストセット
+      pre.style.userSelect = 'auto'
+      pre.textContent = location.href
+
+      // 要素を追加、選択してクリップボードにコピー
+      document.body.appendChild(pre)
+      document.getSelection()?.selectAllChildren(pre)
+      document.execCommand('copy')
+
+      // 要素を削除
+      document.body.removeChild(pre)
+
+      alert('リンクをコピーしました')
+    },
   },
 })
 </script>
